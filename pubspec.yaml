@@ -1,5 +1,8 @@
 name: otel_amplify
-description: OpenTelemetry instrumentation for AWS Amplify BaaS calls. CLIENT spans per Auth / DataStore / API / Storage operation with amplify.* attrs.
+description: >-
+  OpenTelemetry instrumentation for amplify_flutter by Dartastic.io. Adds
+  standard OpenTelemetry observability to applications that use
+  amplify_flutter.
 version: 0.1.0-wip
 repository: https://github.com/dartastic/otel_amplify
 homepage: https://dartastic.io
