@@ -1,13 +1,13 @@
-// Licensed under the Dartastic Pro Software License Agreement.
+// Licensed under the Apache License, Version 2.0
 // Copyright 2025-2026 Mindful Software LLC d/b/a Dartastic.io, All rights reserved.
 
-import 'package:dartastic_opentelemetry/dartastic_opentelemetry.dart';
+import 'package:dartastic_opentelemetry_api/dartastic_opentelemetry_api.dart';
 
 import 'otel_amplify_suppression.dart';
 
 const _tracerName = 'dartastic_otel_libs_amplify';
 
-Tracer _tracer() => OTel.tracerProvider().getTracer(_tracerName);
+APITracer _tracer() => OTelAPI.tracerProvider().getTracer(_tracerName);
 
 /// Wraps an AWS Amplify Auth operation (signIn, signOut, signUp,
 /// confirmSignUp, resetPassword, fetchAuthSession, …) in a CLIENT
@@ -91,15 +91,15 @@ Future<T> _run<T>({
   final span = _tracer().startSpan(
     spanName,
     kind: SpanKind.client,
-    attributes: OTel.attributesFromMap(attributes),
+    attributes: OTelAPI.attributesFromMap(attributes),
   );
   try {
     return await invoke();
   } catch (e, st) {
     span.addAttributes(
-      OTel.attributes([
-        OTel.attributeString(
-          ErrorResource.errorType.key,
+      OTelAPI.attributes([
+        OTelAPI.attributeString(
+          ErrorAttributes.errorType.key,
           e.runtimeType.toString(),
         ),
       ]),
